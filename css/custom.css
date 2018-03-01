@@ -1,0 +1,150 @@
+/*
+
+1. Add your custom Css styles below
+2. Place the this code in your template:
+
+ <link href="css/custom.css" rel="stylesheet">
+
+*/
+.bg-black{
+  background-color: #000000;
+}
+#topbar.bg-earthred{
+  background-color: #cb5819;
+}
+.bg-grdnt{
+  background: rgba(203,87,25,1);
+  background: -moz-linear-gradient(top, rgba(203,87,25,1) 0%, rgba(203,87,25,1) 62%, rgba(0,0,0,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(203,87,25,1)), color-stop(62%, rgba(203,87,25,1)), color-stop(100%, rgba(0,0,0,1)));
+  background: -webkit-linear-gradient(top, rgba(203,87,25,1) 0%, rgba(203,87,25,1) 62%, rgba(0,0,0,1) 100%);
+  background: -o-linear-gradient(top, rgba(203,87,25,1) 0%, rgba(203,87,25,1) 62%, rgba(0,0,0,1) 100%);
+  background: -ms-linear-gradient(top, rgba(203,87,25,1) 0%, rgba(203,87,25,1) 62%, rgba(0,0,0,1) 100%);
+  background: linear-gradient(to bottom, rgba(203,87,25,1) 0%, rgba(203,87,25,1) 62%, rgba(0,0,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb5719', endColorstr='#000000', GradientType=0 );
+}
+
+::selection{
+  background: #914115;
+  color: #FFFFFF;
+  text-shadow: none;
+}
+
+#mainMenu, #mainMenu nav > ul > li > a{
+  color:#FFFFFF;
+}
+#mainMenu.light nav > ul > li > a{
+  color: #000000;
+}
+
+.text-center{
+  text-align: center;
+}
+.red-text{
+  color: #8e0015;
+}
+ol{
+  list-style-type: decimal;
+}
+
+.row.row-link{
+  display: table;
+}
+.row.row-link [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: bottom;;
+  padding: 8px;
+}
+
+#vcm-comparison{
+  background-color: #d6d6d6;
+}
+.table{
+  background-color: #FFFFFF;
+}
+
+.center-thing {
+    display: table-cell;;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    text-align: center;
+    bottom: 0;
+  }
+
+.link-block{
+  min-height: 220px;
+  border: 1px solid #FFFFFF;
+}
+
+.link-block:hover{
+  border: 1px solid #000000;
+}
+
+h4.white-text, h4.white-text + ul li, h4.white-text + ol li, h4.white-text ~ p, p.white-text, h2.white-text{
+  color: #FFFFFF ;
+}
+
+.background-overlay-dark::before{
+  background: rgba(0, 0, 0, 0.5) ;
+}
+
+.background-overlay-dark.darker::before{
+  background: rgba(0, 0, 0, 0.8) ;
+}
+
+
+.grid-item.no-overlay .grid-description, .grid-item.no-overlay .portfolio-description, .portfolio-item.no-overlay .grid-description, .portfolio-item.no-overlay .portfolio-description{
+  position: absolute;
+}
+.grid-item .grid-description, .grid-item .portfolio-description, .portfolio-item .grid-description, .portfolio-item .portfolio-description{
+  top: 40%;
+}
+
+.portfolio-item.no-overlay .portfolio-description h3, .portfolio-item.no-overlay .grid-description h3, .grid-item.no-overlay .portfolio-description h3, .grid-item.no-overlay .grid-description h3{
+  color: #FFFFFF;
+  font-size: 3em;
+  margin-bottom: 14px;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px black;
+}
+.portfolio-item.no-overlay .portfolio-description span, .portfolio-item.no-overlay .grid-description span, .grid-item.no-overlay .portfolio-description span, .grid-item.no-overlay .grid-description span{
+  color: #FFFFFF;
+  font-size: 1.6em;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px black;
+}
+
+.background-overlay-one.p-t-150.p-b-150{
+  height: 400px;
+}
+
+.new-release .text-large {
+    line-height: 40px !important;
+    margin-top: -40px;8-
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+  .grid-item .grid-description, .grid-item .portfolio-description, .portfolio-item .grid-description, .portfolio-item .portfolio-description{
+    top: 30%;
+  }
+
+  .portfolio-item.no-overlay .portfolio-description h3, .portfolio-item.no-overlay .grid-description h3, .grid-item.no-overlay .portfolio-description h3, .grid-item.no-overlay .grid-description h3{
+    font-size: 1.6em;
+  }
+  .portfolio-item.no-overlay .portfolio-description span, .portfolio-item.no-overlay .grid-description span, .grid-item.no-overlay .portfolio-description span, .grid-item.no-overlay .grid-description span{
+    font-size: 1em;
+  }
+
+  .row.row-link{
+    display: block;
+  }
+  .row.row-link [class*="col-"] {
+    display: block;;
+  }
+  .link-block{
+    min-height: inherit;
+    max-width: inherit;
+  }
+
+}

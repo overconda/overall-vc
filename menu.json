@@ -1,0 +1,74 @@
+{
+  "menu": [
+    {
+      "name": "Home",
+      "link": "index.php"
+    },
+    {
+      "name": "Product",
+      "link": "product.php",
+      "sub": [
+        {
+          "name": "Karaoke",
+          "link": "karaoke.php"
+        },
+        {
+          "name": "Sound",
+          "link": "sound.php"
+        },
+        {
+          "name": "CCTV",
+          "link": "cctv.php"
+        },
+        {
+          "name": "TJ Media",
+          "link": "tj.php"
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "link": "service.php"
+    },
+    {
+      "name": "Customer",
+      "link": "customer.php",
+      "sub": [
+        {
+          "name": "กรุงเทพ",
+          "link": "customer.php#bangkok"
+        },
+        {
+          "name": "ต่างจังหวัด",
+          "link": "customer.php#district"
+        },
+        {
+          "name": "ต่างประเทศ",
+          "link": "customer.php#outct"
+        }
+      ]
+    },
+    {
+      "name": "News & Update",
+      "link": "news.php"
+    },
+    {
+      "name": "Employment",
+      "link": "employment.php"
+    },
+    {
+      "name": "About & Contact",
+      "link": "about.php",
+      "sub": [
+        {
+          "name": "About Us",
+          "link": "about.php"
+        },
+        {
+          "name": "Contact Us",
+          "link": "about.php#contact"
+        }
+      ]
+    }
+  ]
+}

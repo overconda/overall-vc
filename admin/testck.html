@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKEditor Sample</title>
+	<script src="ckeditor/ckeditor.js"></script>
+	<script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.2.2/uploadcare.full.min.js"></script>
+	<script>
+UPLOADCARE_PUBLIC_KEY = 'f5eb79684aea1d24ad75';
+</script>
+</head>
+<body id="main">
+
+
+
+
+
+<form method="post" id="form" action="do_add_product.php">
+	Title: <input type="text" name="title" />
+	<br />
+<div class="adjoined-bottom">
+	<div class="grid-container">
+		<div class="grid-width-100">
+			<input type="hidden" name="ed" id="ed" />
+			<div id="editor">
+
+				<h1>Hello world!</h1>
+				<h1>Hello world!</h1>
+				<p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+	<button type="submit" class="btn btn-ok">Submit.	</button>
+</div>
+</form>
+
+
+<script>
+/*
+CKEDITOR.config.extraPlugins = 'uploadimage';
+//KEDITOR.config.uploadUrl = '/uploader/upload.php';
+CKEDITOR.replace( 'editor' );//.config.extraPlugins = 'uploadimage';
+//config.extraPlugins = 'uploadcare';
+
+*/
+
+var toolbarGroups = [
+{ name: 'styles', groups: [ 'styles' ] },
+{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+{ name: 'forms', groups: [ 'forms' ] },
+{ name: 'paragraph', groups: [ 'align', 'list', 'indent', 'blocks', 'bidi', 'paragraph' ] },
+{ name: 'links', groups: [ 'links' ] },
+{ name: 'insert', groups: [ 'insert' ] },
+{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+'/',
+{ name: 'colors', groups: [ 'colors' ] },
+{ name: 'tools', groups: [ 'tools' ] },
+{ name: 'others', groups: [ 'others' ] },
+{ name: 'about', groups: [ 'about' ] }
+];
+
+CKEDITOR.replace( 'editor',{
+	toolbarGroups,
+	removeButtons : 'Scayt,SelectAll,Find,Replace,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Save,Templates,NewPage,Preview,Print,BidiLtr,BidiRtl,Language,CreateDiv,Blockquote,Outdent,Indent,Anchor,Flash,Smiley,SpecialChar,PageBreak,Iframe,Table,HorizontalRule,CopyFormatting,RemoveFormat,Undo,Redo,Cut,Copy,Paste,PasteText,PasteFromWord,Subscript,Superscript,Strike,Maximize,ShowBlocks,About,TextColor,BGColor,Font,Format,FontSize'
+});
+
+console.log('ok..');
+
+
+
+
+
+
+</script>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$("#form").on("submit", function(){
+   //Code: Action (like ajax...)
+	 var data = CKEDITOR.instances.editor.getData();
+	 $('#ed').attr('value', data);
+
+	//console.log($('#editor').html());
+	 //$(this).src = "do_add_product.php";
+	 $(this).submit();
+	 //alert('submitttt');
+   return false;
+ });
+</script>
+
+
+</body>
+</html>
