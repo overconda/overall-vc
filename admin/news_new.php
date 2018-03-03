@@ -1,4 +1,17 @@
 <?php
+///////// Check Login Section /////////
+
+if(!isset($_COOKIE['admin'])){
+  header('Location: login.php');
+}else{
+  if($_COOKIE['admin'] != 'yes'){
+    header('Location: login.php');
+  }
+}
+///////// End Check Login Section /////////
+
+
+
 include_once('../dbconfig.php');
 include_once('admin_functions.php');
 

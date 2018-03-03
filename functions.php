@@ -25,7 +25,12 @@ function drawMenu(){
   foreach($menu as $index => $topmenu){
     $top = $topmenu['name'];
     $link = $topmenu['link'];
-    $ret .= "\n<li class='dropdown-submenu'><a href='$link'>$top</a>";
+    if(isset($topmenu['sub'])){
+      $ret .= "\n<li class='dropdown-submenu'><a href='$link'>$top</a>";
+    }else{
+      $ret .= "\n<li class=''><a href='$link'>$top</a>";
+    }
+
     if(isset($topmenu['sub'])){
       $ret .= "\n<ul class='dropdown-menu'>";
       foreach($topmenu['sub'] as $subindex => $submenu){

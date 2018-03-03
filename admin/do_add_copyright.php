@@ -1,5 +1,17 @@
 <?php
 $copyright = $_POST['copyright'];
+///////// Check Login Section /////////
+
+if(!isset($_COOKIE['admin'])){
+  header('Location: login.php');
+}else{
+  if($_COOKIE['admin'] != 'yes'){
+    header('Location: login.php');
+  }
+}
+///////// End Check Login Section /////////
+
+
 
 
 include('../dbconfig.php');
