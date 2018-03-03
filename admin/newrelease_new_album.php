@@ -61,7 +61,7 @@ drawAdminHeader();
               include_once("../dbconfig.php");
 
 
-              $query = "SELECT id,artist_name FROM artist order by id desc";
+              $query = "SELECT id,artist_name FROM artist where active=1 order by id desc";
               if ($stmt = $mysqli->prepare($query)) {
 
                   $stmt->execute();
@@ -90,7 +90,7 @@ drawAdminHeader();
               include_once("../dbconfig.php");
 
 
-              $query = "SELECT id,copyright FROM copyright order by id desc";
+              $query = "SELECT id,copyright FROM copyright where active=1 order by id desc";
               if ($stmt = $mysqli->prepare($query)) {
 
                   $stmt->execute();
@@ -217,6 +217,7 @@ include_once('../dbconfig.php');
 $query = "SELECT nr_id as id, code , album ,artist.artist_name ,copyright.copyright, nr_year as y , nr_month as m FROM newrelease";
 $query .= " inner join copyright on newrelease.copyright = copyright.id ";
 $query .= " inner join artist on newrelease.artist_id = artist.id ";
+$query .= " where newrelease.active =1 ";
 $query .= " ORDER by y, m DESC ";
 if ($stmt = $mysqli->prepare($query)) {
 

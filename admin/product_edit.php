@@ -1,16 +1,39 @@
 <?php
+if(!isset($_GET['id'])) header('Location: product_new.php');
+
 include_once('../dbconfig.php');
 include_once('admin_functions.php');
 
 drawAdminHeader();
+
+$id = $_GET['id'];
+$DATA = array();
+
+$query = "SELECT title, detail, product.cate_id, product_cate.cate_name, product.subcate_id, product_subcate.subcate_name FROM product ";
+$query .= " inner join product_cate on product.cate_id = product_cate.cate_id";
+$query .= " left outer join product_subcate on product.subcate_id = product_subcate.subcate_id ";
+$query .= " WHERE product.product_id = $id";
+
+echo $sql;
+
+if ($stmt = $mysqli->prepare($query)) {
+
+    $stmt->execute();
+
+    $stmt->bind_result( $title, $detail,$cate_id, $cate_name, $subcate_id, $subcate_name);
+    $i=1;
+    while ($stmt->fetch()) {
+        $DATA['title']        = $title;
+        $DATA['detail']       = $detail;
+        $DATA['cate_id']      = $cate_id;
+        $DATA['cate_name']    = $cate_name;
+        $DATA['subcate_id']   = $subcate_id;
+        $DATA['subcate_name'] = $subcate_name;
+    }
+
+    $stmt->close();
+}
 ?>
-
-<!-- Theme included stylesheets -->
-<link href="//cdn.quilljs.com/1.3.5/quill.snow.css" rel="stylesheet">
-<link href="//cdn.quilljs.com/1.3.5/quill.bubble.css" rel="stylesheet">
-
-<!-- Core build with no theme, formatting, non-essential modules -->
-<link href="//cdn.quilljs.com/1.3.5/quill.core.css" rel="stylesheet">
 
 <style>
   #editor-container {
@@ -20,8 +43,8 @@ drawAdminHeader();
 
 <section class="content-header">
   <h1>
-    New Product
-    <small>Add New Product</small>
+    Edit Product
+    <small>Edit Product</small>
   </h1>
 </section>
 
@@ -32,16 +55,16 @@ drawAdminHeader();
   <div class="col-md-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">เพิ่มสินค้า</h3>
+        <h3 class="box-title">แก้ไขสินค้า</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="do_add_product.php" id="form">
+      <form role="form" method="post" action="do_edit_product.php" id="form">
         <div class="box-body">
 
           <div class="form-group">
             <label for="title">ชื่อสินค้า</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="พิมพ์ชื่อสินค้า">
+            <input type="text" class="form-control" id="title" name="title" placeholder="พิมพ์ชื่อสินค้า" value="<?php echo $DATA['title'];?>">
           </div>
 
           <div class="form-group">
@@ -62,7 +85,9 @@ drawAdminHeader();
                   $stmt->bind_result($id, $name);
                   $i=1;
                   while ($stmt->fetch()) {
-                      echo "\n<option value=$id>" . $name;
+                      $sel = "";
+                      if($id == $DATA['cate_id']) $sel = "selected";
+                      echo "\n<option value=$id $sel>" . $name;
                       echo "</option>";
                       //$i++;
                       $CATE[$id] = $name;
@@ -98,7 +123,10 @@ drawAdminHeader();
                       //$i++;
 
                       $SUBCATE[$mainid][$id]['subcate'] = $name;
-                      echo "\n<option value='$id' data-chained='$mainid'>$name";
+                      $sel = "";
+                      if($mainid == $DATA['cate_id'] && $id == $DATA['subcate_id']) $sel = "selected";
+
+                      echo "\n<option value='$id' data-chained='$mainid' $sel>$name";
 
                       echo "</option>";
                   }
@@ -152,9 +180,11 @@ drawAdminHeader();
             <input type="hidden" name="ed" id="ed" />
       			<div id="editor">
 
-      				<h1>Hello world!</h1>
-      				<h1>Hello world!</h1>
-      				<p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+      				<?php
+              $detail = htmlspecialchars_decode($DATA['detail']);
+              echo $detail;;
+
+              ?>
 
       			</div>
 
@@ -166,6 +196,8 @@ drawAdminHeader();
         </div>
         <!-- /.box-body -->
 
+        <input type="hidden" name="id" value="<?php echo $id;?>" />
+
         <div class="box-footer">
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
@@ -176,81 +208,7 @@ drawAdminHeader();
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-8">
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">รายชื่อศิลปิน</h3>
-      </div>
-      <!-- /.box-header -->
 
-      <div class="box-body">
-        <table id="example2" class="table table-bordered table-hover">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>รายการ</th>
-            <th>หมวดหมู่</th>
-            <th>หมวดย่อย</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <?php
-
-
-$query = "SELECT product.product_id,title, product_cate.cate_name, product_subcate.subcate_name FROM product ";
-$query .= " inner join product_cate on product.cate_id = product_cate.cate_id";
-$query .= " left outer join product_subcate on product.subcate_id = product_subcate.subcate_id ";
-$query .= " ORDER by product_id DESC ";
-if ($stmt = $mysqli->prepare($query)) {
-
-    $stmt->execute();
-
-    $stmt->bind_result($id, $title, $cate_name, $subcate_name);
-    $i=1;
-    while ($stmt->fetch()) {
-        //printf ("<tr>\n<td>%s</td><td>%s</td><td><a href='newrelease_edit_copyright.php?id=%s'>Edit</a></td><td><a href='newrelease_delete_copyright.php?id=%s'>X</a></td>\n</tr>%s (%s)\n", $id, $copyright,$id,$id);
-        echo "<tr>";
-        echo "  <td>$i</td>";
-        echo "  <td>$title</td>";
-        echo "  <td>$cate_name</td>";
-        echo "  <td>$subcate_name</td>";
-        echo "  <td align=right><a href='product_edit.php?id=$id'>Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0);'  data-href='product_delete.php?id=$id' data-toggle=\"modal\" data-target=\"#confirm-delete\">X</a></td>";
-        echo "</tr>";
-        $i++;
-    }
-
-    $stmt->close();
-}
-
-           ?>
-          </tbody>
-        </table>
-      </div>
-
-
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>ยืนยันการลบข้อมูล</h2>
-            </div>
-            <div class="modal-body">
-                หากยืนยันที่จะลบข้อมูล ให้กด Delete ได้เลยครับ
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger btn-ok">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 </section>
 

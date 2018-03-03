@@ -64,7 +64,7 @@ drawAdminHeader();
           <?php
 
 include_once('../dbconfig.php');
-$query = "SELECT id,copyright FROM copyright ORDER by id DESC ";
+$query = "SELECT id,copyright FROM copyright where active=1 ORDER by id DESC ";
 if ($stmt = $mysqli->prepare($query)) {
 
     $stmt->execute();

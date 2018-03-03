@@ -6,7 +6,7 @@ $id = $_GET['id'];
 
 include('../dbconfig.php');
 
-$query = "delete from copyright where id = $id";
+$query = "update copyright set active =0 where id = $id";
 if ($stmt = $mysqli->prepare($query)) {
 
     $stmt->execute();

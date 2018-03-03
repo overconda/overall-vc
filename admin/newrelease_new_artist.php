@@ -64,7 +64,7 @@ drawAdminHeader();
           <?php
 
 include_once('../dbconfig.php');
-$query = "SELECT id,artist_name FROM artist ORDER by id DESC ";
+$query = "SELECT id,artist_name FROM artist WHERE active=1 ORDER by id DESC ";
 if ($stmt = $mysqli->prepare($query)) {
 
     $stmt->execute();
