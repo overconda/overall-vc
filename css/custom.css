@@ -81,8 +81,8 @@ ol{
   border: 1px solid #000000;
 }
 
-h4.white-text, h4.white-text + ul li, h4.white-text + ol li, h4.white-text ~ p, p.white-text, h2.white-text{
-  color: #FFFFFF ;
+h4.white-text, h4.white-text + ul li, h4.white-text + ol li, h4.white-text ~ p, p.white-text, h2.white-text, h1.text-large.white-text{
+  color: #FFFFFF !important;
 }
 
 .background-overlay-dark::before{
@@ -122,6 +122,15 @@ h4.white-text, h4.white-text + ul li, h4.white-text + ol li, h4.white-text ~ p, 
     margin-top: -40px;8-
 }
 
+#new-release-h1 {
+    text-shadow: 0 0 6px #000000;
+}
+
+
+
+.force-white, .force-white *{
+  color: #FFFFFF !important;
+}
 
 
 @media only screen and (max-width: 1024px) {

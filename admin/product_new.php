@@ -43,7 +43,7 @@ drawAdminHeader();
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="do_add_product.php" id="form">
+      <form role="form" method="post" action="do_add_product.php" id="frmproduct" name="frmproduct" enctype="multipart/form-data">
         <div class="box-body">
 
           <div class="form-group">
@@ -145,6 +145,11 @@ drawAdminHeader();
           });
 
           </script>
+
+          <div class="form-group">
+            <label for="fthumb">ภาพ Thumbnail สินค้า (scale 1x1)</label>
+            <input type="file" class="form-control" id="fthumb" name="fthumb" >
+          </div>
 
           <div class="box">
             <div class="box-header">
@@ -302,6 +307,7 @@ CKEDITOR.replace( 'editor',{
 
 
 <script>
+/*
 $("#form").on("submit", function(){
    //Code: Action (like ajax...)
 	 var data = CKEDITOR.instances.editor.getData();
@@ -314,6 +320,38 @@ $("#form").on("submit", function(){
 	 $(this).submit();
 	 //alert('submitttt');
    return false;
+ });
+ */
+ $(document).ready(function(){
+   $('#frmproduct').on("submit", function(){
+     var data = CKEDITOR.instances.editor.getData();
+     $('#ed').attr('value', data);
+
+
+     var form = document.forms.namedItem("frmproduct");
+
+     form.addEventListener('submit', function(ev) {
+
+        var oOutput = document.querySelector("div"),
+            oData = new FormData(form);
+
+
+        //oData.append("ed", data);
+
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "do_add_product.php", true);
+        oReq.onload = function(oEvent) {
+          if (oReq.status == 200) {
+            oOutput.innerHTML = "Uploaded!";
+          } else {
+            oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+          }
+      };
+
+      oReq.send(oData);
+      ev.preventDefault();
+    }, false);
+  });
  });
 </script>
 <script>

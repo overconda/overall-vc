@@ -8,6 +8,12 @@ function drawHeader(){
   echo $s;
 }
 
+/*
+function drawFooter(){
+  //$s = file_get_contents('_footer.html');
+//  echo $s;
+}
+*/
 
 function drawMenu(){
   $ret = "";
@@ -49,6 +55,7 @@ function drawMenu(){
 
   return $ret;
 }
+
 
 function drawFooter(){
 $out =<<<EOD
