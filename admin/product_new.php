@@ -52,6 +52,24 @@ drawAdminHeader();
           </div>
 
           <div class="form-group">
+            <label for="price">ราคา</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="ราคา (ไม่ต้องมี comma )">
+          </div>
+          <div class="form-group">
+            <label for="pricesp">ราคาพิเศษ</label>
+            <input type="text" class="form-control" id="pricesp" name="pricesp" placeholder="ถ้าไม่มี ให้เว้นว่างไว้">
+          </div>
+          <div class="form-group">
+            <label for="thumburl">Thumbnail URL</label>
+            <input type="text" class="form-control" id="thumburl" name="thumburl" placeholder="Thumb URL">
+          </div>
+
+          <div class="form-group">
+            <label for="stock">มีสินค้า</label>
+            <input type="checkbox" id="stock" name="stock" checked>
+          </div>
+
+          <div class="form-group">
             <label for="cate">หมวดหมู่</label>
             <select name="cate" class="form-control" id="cate">
               <<option value="">--- เลือกหมวดหมู่ ---</option>
@@ -148,7 +166,7 @@ drawAdminHeader();
 
           <div class="form-group">
             <label for="fthumb">ภาพ Thumbnail สินค้า (scale 1x1)</label>
-            <input type="file" class="form-control" id="fthumb" name="fthumb" >
+            <input type="file" class="form-control" id="fthumb" name="fthumb" disabled>
           </div>
 
           <div class="box">

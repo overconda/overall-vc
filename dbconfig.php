@@ -1,8 +1,8 @@
 <?php
 $server = "localhost";
-$db = "vc_db";
-$user = "root";
-$pwd = "root";
+$db = "vcyoucom_web";//"vc_db";
+$user = "vcyoucom_web";//"root";
+$pwd = "DPUy%E@X8_mM@3&g";//"root";
 
 
 $mysqli = new mysqli($server, $user, $pwd, $db);

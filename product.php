@@ -2,6 +2,56 @@
 include('functions.php');
 include('dbconfig.php');
 drawHeader();
+
+$cate = $_GET['cate']+0;
+$subcate = $_GET['subcate']+0;
+
+$CATENAME = "";
+$SUBCATENAME = "";
+
+
+//// get category name
+$query = " SELECT cate_name from product_cate where cate_id = $cate limit 1";
+
+if ($stmt = $mysqli->prepare($query)) {
+  $stmt->execute();
+  $stmt->bind_result($catename);
+  $i=1;
+  while ($stmt->fetch()) {
+    $CATENAME = $catename;
+
+  }
+}
+
+$query = " SELECT subcate_name from product_subcate where subcate_id = $subcate limit 1";
+if ($stmt = $mysqli->prepare($query)) {
+  $stmt->execute();
+  $stmt->bind_result($subcatename);
+  $i=1;
+  while ($stmt->fetch()) {
+    $SUBCATENAME = $subcatename;
+  }
+}
+
+if(trim($SUBCATENAME)!=''){
+  $SUBCATENAME = ' - ' . $SUBCATENAME;
+}
+
+$WHERE = " WHERE active=1 ";
+$col = 2;
+if($cate==0 && $subcate==0){
+  $col=3;
+  $CATENAME = " All Products";
+}else{
+  if($cate>0 && $subcate==0){
+    $col = 3;
+    $WHERE .= " and cate_id = $cate ";
+  }else{
+    $WHERE .= " and cate_id = $cate and subcate_id = $subcate ";
+  }
+
+}
+
 ?>
 
         <!-- Content -->
@@ -12,268 +62,85 @@ drawHeader();
                     <div class="content col-md-10">
                         <!-- Page title -->
                 <div class="page-title">
-                    <h1>Blog Masonry - Sidebar</h1>
-                    <div class="breadcrumb float-left">
-                        <ul>
-                            <li><a href="#">Home</a>
-                            </li>
-                            <li><a href="#">Blog</a>
-                            </li>
-                            <li class="active"><a href="#">Sidebar</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <h1><?php echo $CATENAME . $SUBCATENAME; ?></h1>
+
                 </div>
                 <!-- end: Page title -->
 
-                <!-- Blog -->
-                <div id="blog" class="grid-layout post-3-columns m-b-30" data-item="post-item">
-
-                    <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-image">
-                                <a href="#">
-                                    <img alt="" src="images/blog/12.jpg">
-                                </a>
-                                <span class="post-meta-category"><a href="">Lifestyle</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
-                                <h2><a href="#">Lighthouse, standard post with a single image
-</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.</p>
-
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
-
-                    <!-- Post item YouTube-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-video">
-                                <iframe width="560" height="320" src="https://www.youtube.com/embed/dA8Smj5tZOQ" frameborder="0" allowfullscreen></iframe>
-                                <span class="post-meta-category"><a href="">Video</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
-
-                                <h2><a href="#">This is a example post with YouTube</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.</p>
-
-                                <a href="#" class="item-link">Read More </a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item YouTube-->
-
-                    <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-slider">
-                                <div class="carousel dots-inside arrows-visible arrows-only" data-items="1" data-loop="true" data-autoplay="true" data-lightbox="gallery">
-                                    <a href="images/blog/11.jpg" data-lightbox="gallery-item">
-                                        <img alt="" src="images/blog/16.jpg">
-                                    </a>
-                                    <a href="images/blog/16.jpg" data-lightbox="gallery-item">
-                                        <img alt="" src="images/blog/11.jpg">
-                                    </a>
-                                </div>
-                                <span class="post-meta-category"><a href="">Technology</a></span>
-                            </div>
-
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
-                                <h2><a href="#">Simplicity, a post with slider gallery</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet. Pulvinar euismod antesagittis ante posuere ligula pharetra laoreet.</p>
-
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
-
-                     <!-- Post item Vimeo-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-video">
-                                <iframe src="https://player.vimeo.com/video/198559065?title=0&byline=0&portrait=0" width="560" height="320" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                <span class="post-meta-category"><a href="">Video</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
-
-                                <h2><a href="#">This is a example post with Vimeo video</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.
-                                Cagittis ante posuere ac. Fusce at velit id ligula pharetra laoreet.</p>
-
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item Vimeo-->
 
 
 
-                    <!-- Post item HTML5 Audio-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-audio">
-                                <a href="#">
-                                    <img alt="" src="images/blog/audio-bg.jpg">
-                                </a>
-                                <span class="post-meta-category"><a href="">Audio</a></span>
-                                <audio class="video-js vjs-default-skin" controls preload="false" data-setup="{}">
-                                    <source src="audio/beautiful-optimist.mp3" type="audio/mp3" />
-                                </audio>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
 
-                                <h2><a href="#">Self Hosted HTML5 Audio (mp3) with image cover</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ac sagittis ante posuere ac ligula pharetra laoreet.</p>
 
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+<?php
+$query = " select product_id, title, detail, price, pricesp+0, thumb, stock+0 ";
+$query .= " FROM product ";
+$query .= $WHERE;
+$query .= " ORDER by product_id ";
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
+$output = "";
 
-                     <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-image">
-                                <a href="#">
-                                    <img alt="" src="images/blog/17.jpg">
-                                </a>
-                                <span class="post-meta-category"><a href="">Science</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
+if ($stmt = $mysqli->prepare($query)) {
+  $stmt->execute();
+  $stmt->bind_result($pid , $title, $detail, $price, $pricesp, $thumb, $stock);
+  $i=0;
+  while ($stmt->fetch()) {
+    $i++;
+    $PRICE = "";
+    if($pricesp > 0){
+      $PRICE = "ราคา <del>" . number_format($price) . "</del> บาท พิเศษ " . number_format($pricesp) . " บาท";
+    }else{
+      $PRICE = "ราคา " . number_format($price) . " บาท";
+    }
 
-                                <h2><a href="#">Lighthouse, standard post with a single image
-</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.
-                                </p>
+    $detail = htmlspecialchars_decode($detail);
 
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+    $STOCK = "";
+    if($stock ==0){
+      $STOCK = "<h3><strong><mark>&nbsp;สินค้าหมด&nbsp;</mark></strong></h3>";
+    }
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
 
-                    <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-image">
-                                <a href="#">
-                                    <img alt="" src="images/blog/18.jpg">
-                                </a>
-                                <span class="post-meta-category"><a href="">Science</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
+    $output .= "                   <!-- Post item-->\n";
+    $output .= "                   <div class=\"product post-item border\">\n";
+    $output .= "                       <div class=\"post-item-wrap\">\n";
+    $output .= "                           <div class=\"post-slider\">\n";
+    $output .= "                                       <img alt=\"\" src=\"$thumb\">\n";
+    $output .= "                           </div>\n";
+    $output .= "\n";
+    $output .= "                           <div class=\"post-item-description\">\n";
+    $output .= "                               <h2>$title</h2>\n";
+    $output .= "                               <h4 class=\"text-danger\">$PRICE</h4>\n";
+    $output .= $STOCK;
+    $output .= "                               <p>$detail</p>\n";
+    $output .= "\n";
+    $output .= "                           </div>\n";
+    $output .= "                       </div>\n";
+    $output .= "                   </div>\n";
+    $output .= "                   <!-- end: Post item-->  \n";
+    $output .= "\n";
+  }
+}
 
-                                <h2><a href="#">Lighthouse, standard post with a single image
-</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.</p>
-
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
+if($i==0){
+    $output = "<div class='row'><div class='col-md-12' style='text-align:center;'><p><h4>ไม่พบสินค้า</h4></p></div></div>";
+}else{
+  $output = "<!-- Blog -->\n<div id=\"blog\" class=\"grid-layout post-$col-columns m-b-30\" data-item=\"post-item\">". $output . "</div>\n<!-- end: Blog -->";
+}
 
 
 
-                    <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-slider">
-                                <div class="carousel dots-inside arrows-visible arrows-only" data-autoplay-timeout="2600" data-animate-in="fadeIn" data-animate-out="fadeOut" data-items="1" data-loop="true" data-autoplay="true" data-lightbox="gallery">
-                                    <a href="images/blog/19.jpg" data-lightbox="gallery-item">
-                                        <img alt="" src="images/blog/19.jpg">
-                                    </a>
-                                    <a href="images/blog/20.jpg" data-lightbox="gallery-item">
-                                        <img alt="" src="images/blog/20.jpg">
-                                    </a>
-                                </div>
-                                <span class="post-meta-category"><a href="">Technology</a></span>
-                            </div>
 
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
-                                <h2><a href="#">Simplicity, a post with slider gallery</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.</p>
+echo $output;
 
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+ ?>
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
 
-                     <!-- Post item-->
-                    <div class="post-item border">
-                        <div class="post-item-wrap">
-                            <div class="post-image">
-                                <a href="#">
-                                    <img alt="" src="images/blog/23.jpg">
-                                </a>
-                                <span class="post-meta-category"><a href="">Science</a></span>
-                            </div>
-                            <div class="post-item-description">
-                                <span class="post-meta-date"><i class="fa fa-calendar-o"></i>Jan 21, 2017</span>
-                                <span class="post-meta-comments"><a href=""><i class="fa fa-comments-o"></i>33 Comments</a></span>
 
-                                <h2><a href="#">Lighthouse, standard post with a single image
-</a></h2>
-                                <p>Curabitur pulvinar euismod ante, ac sagittis ante posuere ac. Vivamus luctus commodo dolor porta feugiat. Fusce at velit id ligula pharetra laoreet.</p>
 
-                                <a href="#" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Post item-->
 
-                </div>
-                <!-- end: Blog -->
 
-                <!-- Pagination -->
-                <div class="pagination pagination-simple">
-                    <ul>
-                        <li>
-                            <a href="#" aria-label="Previous"> <span aria-hidden="true"><i class="fa fa-angle-left"></i></span> </a>
-                        </li>
-                        <li><a href="#">1</a> </li>
-                        <li><a href="#">2</a> </li>
-                        <li class="active"><a href="#">3</a> </li>
-                        <li><a href="#">4</a> </li>
-                        <li><a href="#">5</a> </li>
-                        <li>
-                            <a href="#" aria-label="Next"> <span aria-hidden="true"><i class="fa fa-angle-right"></i></span> </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end: Pagination -->
 
                     </div>
                     <!-- end: post content -->
@@ -283,26 +150,26 @@ drawHeader();
                         <div class="pinOnScroll">
                           <h4>Product Category</h4>
                           <ul class="list-icon list-icon-arrow">
-                            <li><strong>Karaoke</strong></li>
+                            <li><strong><a href="vcm.php">Karaoke</a></strong></li>
                             <li><strong>Sound</strong>
                               <ul class="list-icon list-icon-arrow">
-                                <li>ลำโพง</li>
-                                <li>แอมป์</li>
-                                <li>ไมโครโฟน</li>
-                                <li>ซับวูฟเฟอร์</li>
-                                <li>อุปกรณ์เสริม</li>
+                                <li><a href="product.php?cate=2&subcate=1">ลำโพง</a></li>
+                                <li><a href="product.php?cate=2&subcate=2">แอมป์</a></li>
+                                <li><a href="product.php?cate=2&subcate=3">ไมโครโฟน</a></li>
+                                <li><a href="product.php?cate=2&subcate=4">ซับวูฟเฟอร์</a></li>
+                                <li><a href="product.php?cate=2&subcate=5">อุปกรณ์เสริม</a></li>
                               </ul>
                             </li>
                             <li><strong>CCTV</strong>
                               <ul class="list-icon list-icon-arrow">
-                                <li>Promotion</li>
-                                <li>กล้องวงจรปิด</li>
-                                <li>เครื่องบันทึก</li>
-                                <li>อุปกรณ์เสริม</li>
-                                <li>เกร็ดความรู้</li>
+                                <li><a href="product.php?cate=3&subcate=6">Promotion</a></li>
+                                <li><a href="product.php?cate=3&subcate=7">กล้องวงจรปิด</a></li>
+                                <li><a href="product.php?cate=3&subcate=8">เครื่องบันทึก</a></li>
+                                <li><a href="product.php?cate=3&subcate=9">อุปกรณ์เสริม</a></li>
+                                <li><a href="product.php?cate=3&subcate=10">เกร็ดความรู้</a></li>
                               </ul>
                             </li>
-                            <li><strong>TJ Media</strong></li>
+                            <li><strong><a href="product.php?cate=4">TJ Media</a></strong></li>
                           </ul>
 
 

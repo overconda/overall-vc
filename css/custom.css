@@ -126,11 +126,25 @@ h4.white-text, h4.white-text + ul li, h4.white-text + ol li, h4.white-text ~ p, 
     text-shadow: 0 0 6px #000000;
 }
 
+.post-item.border .post-item-wrap{
+  border: 2px solid #c0c0c0 !important;
+}
+
+.product.post-item.border .post-item-wrap:hover{
+  border: 3px solid #FF0303 !important;
+}
+
 
 
 .force-white, .force-white *{
   color: #FFFFFF !important;
 }
+
+#copyright th, #copyright td{
+  text-align: center;
+  vertical-align: middle;
+}
+
 
 
 @media only screen and (max-width: 1024px) {

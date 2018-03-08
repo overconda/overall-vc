@@ -236,18 +236,7 @@ drawHeader();
                     </div>
                     <div class="col-md-7 p-l-40 p-r-40" data-animation="fadeInRight">
                         <div class="m-b-40">
-                            <h2>ราคาลิขสิทธิ์คาราโอเกะ</h2>
-                            <p>
-                              <ul>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                                <li><a href="">xxxx</a></li>
-                              </ul>
-                            </p>
+                            <button type="button" class="btn btn-light btn-creative btn-icon-holder  btn-dark-hover text-small" style="color:#000000 !important;">ตรวจสอบราคาลิขสิทธิ์คาราโอเกะ<i class="fa fa-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>

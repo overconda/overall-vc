@@ -48,7 +48,7 @@ drawAdminHeader();
 
           <div class="form-group">
             <label for="title">หัวข้อข่าว</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="พิมพ์ชื่อสินค้า">
+            <input type="text" class="form-control" id="title" name="title" placeholder="พิมพ์หัวข้อ">
           </div>
 
 
