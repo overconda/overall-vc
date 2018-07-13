@@ -160,12 +160,12 @@ if ($stmt = $mysqli->prepare($query)) {
         $detail = htmlspecialchars_decode($detail);
         $detail = strip_tags($detail);  /// remove html tag to simple show on table
 
-        $max = 140;
+
         if(strlen($title) > $max){
-          $title = substr($title,0,$max) . '...';
+          $title = iconv_substr($title,0,100,"UTF-8") . '...';
         }
         if(strlen($detail) > $max){
-          $detail = substr($detail,0,$max) . '...';
+          $detail = iconv_substr($detail,0,60,"UTF-8") . '...';
         }
 
 

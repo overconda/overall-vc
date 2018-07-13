@@ -6,7 +6,7 @@ $pwd = "DPUy%E@X8_mM@3&g";//"root";
 
 
 $mysqli = new mysqli($server, $user, $pwd, $db);
-
+mysqli_set_charset($mysqli, "utf8");
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());

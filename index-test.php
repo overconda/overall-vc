@@ -1,8 +1,10 @@
 <?php
 include('functions.php');
-include('dbconfig.php');
+//include('dbconfig.php');
 drawHeader();
 ?>
+
+
         <section class="p-0">
           <div class="container-full">
             <div class="row">
@@ -116,79 +118,6 @@ drawHeader();
             </div>
         </section>
         <!-- end: ABOUT ME -->
-
-
-        <!-- SERVICES -->
-        <section class="text-light" style="background: transparent url(images/polygon/1.jpg);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="col-md-12" data-animation="fadeIn">
-                            <div class="heading heading text-left">
-                                <h1 >News &amp; Update</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-12" data-animation="flipInY" data-animation-delay="100">
-                                <div class="icon-box effect small clean">
-                                    <div class="icon">
-                                        <!--<a href="#"><i class="fa fa-desktop"></i></a>-->
-                                    </div>
-                                    <!--<h3>Powerful template</h3>-->
-
-                                    <p>
-                                    <ul>
-
-
-                                    <?php
-                                    $query = "SELECT news_id,title, detail,date_publish FROM news";
-                                    $query .= " WHERE active=1 ";
-                                    $query .= " ORDER by date_publish DESC LIMIT 10";
-                                    if ($stmt = $mysqli->prepare($query)) {
-
-                                        $stmt->execute();
-
-                                        $stmt->bind_result($id, $title, $detail, $publish);
-                                        $i=1;
-                                        while ($stmt->fetch()) {
-
-                                            $detail = htmlspecialchars_decode($detail);
-                                            $detail = strip_tags($detail);  /// remove html tag to simple show on table
-
-                                            $max = 140;
-                                            if(strlen($title) > $max){
-                                              //$title = substr($title,0,$max) . '...';
-                                              $title = iconv_substr($title, 0, $max, "UTF-8") . '...';
-                                            }
-                                            if(strlen($detail) > $max){
-                                              //$detail = substr($detail,0,$max) . '...';
-                                              $detail = iconv_substr($detail, 0, $max, "UTF-8") . '...';
-                                            }
-
-                                            echo "\n<li>$publish <a href='news.php?id=$id' target='_blank'>$title</a></li>";
-                                            $i++;
-                                        }
-
-                                        $stmt->close();
-                                    }
-
-                                               ?>
-
-                                      </ul>
-
-                                      </p>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end: SERVICES -->
 
 
         <!-- LATEST WORK -->

@@ -21,7 +21,7 @@ if($id>0){
 if($ALL){
   $query = "SELECT news_id, title, detail,date_publish FROM news";
   $query .= $WHERE;
-  $query .= " ORDER by news_id DESC ";
+  $query .= " ORDER by date_publish DESC ";
   if ($stmt = $mysqli->prepare($query)) {
 
       $stmt->execute();
@@ -41,7 +41,7 @@ if($ALL){
 }else{
   $query = "SELECT news_id, title, detail,date_publish FROM news";
   $query .= $WHERE;
-  $query .= " ORDER by news_id DESC ";
+  $query .= " ORDER by date_publish DESC ";
   if ($stmt = $mysqli->prepare($query)) {
 
     $stmt->execute();
